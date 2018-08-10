@@ -2906,31 +2906,11 @@ Sidebar.prototype.addPalette = function (id, title, expanded, onInit) {
     div.style.touchAction = 'none';
   }
 
-  // // test
-  // expanded = true;
+  if (!expanded) {
+    div.style.display = 'none';
+  } 
 
-  // if (expanded) {
-  //   onInit(div);
-  //   onInit = null;
-  // } else {
-  //   div.style.display = 'none';
-  // }
-
-  elt.style.cursor = 'wait';
-  var prev = elt.innerHTML;
-  elt.innerHTML = mxResources.get('loading') + '...';
-
-  window.setTimeout(function () {
-    var fo = mxClient.NO_FO;
-    mxClient.NO_FO = Editor.prototype.originalNoForeignObject;
-    onInit(div);
-    mxClient.NO_FO = fo;
-    div.style.display = 'block';
-    elt.style.cursor = '';
-    elt.innerHTML = prev;
-  }, 0);
-
-  // this.addFoldingHandler(elt, div, onInit);
+  this.addFoldingHandler(elt, div, onInit, expanded);
 
   var outer = document.createElement('div');
   outer.appendChild(div);
@@ -2947,8 +2927,8 @@ Sidebar.prototype.addPalette = function (id, title, expanded, onInit) {
 /**
  * Create the given title element.
  */
-Sidebar.prototype.addFoldingHandler = function (title, content, funct) {
-  var initialized = false;
+Sidebar.prototype.addFoldingHandler = function (title, content, funct, expanded) {
+  initialized = expanded || false;
 
   // Avoids mixed content warning in IE6-8
   if (!mxClient.IS_IE || document.documentMode >= 8) {
@@ -2959,26 +2939,17 @@ Sidebar.prototype.addFoldingHandler = function (title, content, funct) {
   title.style.backgroundRepeat = 'no-repeat';
   title.style.backgroundPosition = '0% 50%';
 
+  if (initialized) {
+    doAddFoldingHandler(title, content, funct);
+  }
+
   mxEvent.addListener(title, 'click', mxUtils.bind(this, function (evt) {
     if (content.style.display == 'none') {
       if (!initialized) {
         initialized = true;
 
         if (funct != null) {
-          // Wait cursor does not show up on Mac
-          title.style.cursor = 'wait';
-          var prev = title.innerHTML;
-          title.innerHTML = mxResources.get('loading') + '...';
-
-          window.setTimeout(function () {
-            var fo = mxClient.NO_FO;
-            mxClient.NO_FO = Editor.prototype.originalNoForeignObject;
-            funct(content);
-            mxClient.NO_FO = fo;
-            content.style.display = 'block';
-            title.style.cursor = '';
-            title.innerHTML = prev;
-          }, 0);
+          doAddFoldingHandler(title, content, funct);
         } else {
           content.style.display = 'block';
         }
@@ -2994,6 +2965,23 @@ Sidebar.prototype.addFoldingHandler = function (title, content, funct) {
 
     mxEvent.consume(evt);
   }));
+
+  function doAddFoldingHandler(title, content, funct) {
+    // Wait cursor does not show up on Mac
+    title.style.cursor = 'wait';
+    var prev = title.innerHTML;
+    title.innerHTML = mxResources.get('loading') + '...';
+
+    window.setTimeout(function () {
+      var fo = mxClient.NO_FO;
+      mxClient.NO_FO = Editor.prototype.originalNoForeignObject;
+      funct(content);
+      mxClient.NO_FO = fo;
+      content.style.display = 'block';
+      title.style.cursor = '';
+      title.innerHTML = prev;
+    }, 0);
+  }
 };
 
 /**
@@ -3088,9 +3076,9 @@ Sidebar.prototype.addStencilPalette = function (id, title, stencilFile, style, i
       }
     }), true, true);
 
-    this.addPaletteFunctions(id, title, false, fns);
+    this.addPaletteFunctions(id, title, true, fns);
   } else {
-    this.addPalette(id, title, false, mxUtils.bind(this, function (content) {
+    this.addPalette(id, title, true, mxUtils.bind(this, function (content) {
       if (style == null) {
         style = '';
       }
