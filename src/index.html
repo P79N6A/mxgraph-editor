@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>webpack 4 quickstart</title>
+    <link rel="stylesheet" type="text/css" href="../resources/grapheditor/styles/grapheditor.css">
+</head>
+
+<body>
+    <div id="app">
+    </div>
+
+    <script type="text/javascript">
+      mxBasePath = '../resources/mxgraph';
+      STYLE_PATH = '../resources/grapheditor/styles';
+      RESOURCE_BASE = '../resources/grapheditor/resources/grapheditor';
+      STENCIL_PATH = '../resources/grapheditor/stencils';
+    </script>
+    <script type="text/javascript">
+      // Parses URL parameters. Supported parameters are:
+      // - lang=xy: Specifies the language of the user interface.
+      // - touch=1: Enables a touch-style user interface.
+      // - storage=local: Enables HTML5 local storage.
+      // - chrome=0: Chromeless mode.
+      var urlParams = (function (url) {
+        var result = new Object();
+        var idx = url.lastIndexOf('?');
+  
+        if (idx > 0) {
+          var params = url.substring(idx + 1).split('&');
+  
+          for (var i = 0; i < params.length; i++) {
+            idx = params[i].indexOf('=');
+  
+            if (idx > 0) {
+              result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+            }
+          }
+        }
+  
+        return result;
+      })(window.location.href);
+  
+      // Default resources are included in grapheditor resources
+      mxLoadResources = false;
+    </script>
+    <script type="text/javascript" src="../resources/grapheditor/js/Init.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/deflate/pako.min.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/deflate/base64.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/jscolor/jscolor.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/sanitizer/sanitizer.min.js"></script>
+    <script type="text/javascript" src="../resources/mxgraph/js/mxClient.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/js/EditorUi.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/js/Editor.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/js/Sidebar.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/js/Graph.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/js/Format.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/js/Shapes.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/js/Actions.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/js/Menus.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/js/Toolbar.js"></script>
+    <script type="text/javascript" src="../resources/grapheditor/js/Dialogs.js"></script>
+
+</body>
+
+</html>
