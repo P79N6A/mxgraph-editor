@@ -4,6 +4,11 @@ import React, {
 
 class GraphEditor extends React.Component {
 
+  saveXML(){
+    const xml = mxUtils.getXml(mxgraphUi.editor.getGraphXml());
+    console.log(xml);
+  }
+
   componentDidMount() {
     var editorUiInit = EditorUi.prototype.init;
 
@@ -40,11 +45,15 @@ class GraphEditor extends React.Component {
       themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
 
       // Main
-      new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
+      window.mxgraphUi = new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
     }, function () {
       document.body.innerHTML =
         '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
     });
+
+
+
+    window.saveXML = this.saveXML;
   }
 
   render() {
