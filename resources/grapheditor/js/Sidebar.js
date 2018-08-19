@@ -1702,14 +1702,14 @@ Sidebar.prototype.createItem = function (cells, title, showLabel, showTitle, wid
     elt = document.createElement('a');
     elt.setAttribute('href', 'javascript:void(0);');
     elt.className = 'geItem';
+    elt.style.overflow = 'hidden';
+    var border = (mxClient.IS_QUIRKS) ? 8 + 2 * this.thumbPadding : 2 * this.thumbBorder;
+    elt.style.width = (this.thumbWidth + border) + 'px';
+    elt.style.height = (this.thumbHeight + border) + 'px';
+    elt.style.padding = this.thumbPadding + 'px';
 
   }
-
-  elt.style.overflow = 'hidden';
-  var border = (mxClient.IS_QUIRKS) ? 8 + 2 * this.thumbPadding : 2 * this.thumbBorder;
-  elt.style.width = (this.thumbWidth + border) + 'px';
-  elt.style.height = (this.thumbHeight + border) + 'px';
-  elt.style.padding = this.thumbPadding + 'px';
+ 
 
   if (mxClient.IS_IE6) {
     elt.style.border = 'none';
@@ -1720,7 +1720,7 @@ Sidebar.prototype.createItem = function (cells, title, showLabel, showTitle, wid
     mxEvent.consume(evt);
   });
 
-  this.createThumb(cells, this.thumbWidth, this.thumbHeight, elt, title, showLabel, showTitle, width, height);
+  // this.createThumb(cells, this.thumbWidth, this.thumbHeight, elt, title, showLabel, showTitle, width, height);
   var bounds = new mxRectangle(0, 0, width, height);
 
   if (cells.length > 1 || cells[0].vertex) {

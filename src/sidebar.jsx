@@ -53,7 +53,8 @@ export default class SideBar extends React.Component {
         <div className="sidebar-title">custom node</div>
         <div className="sidebar-content">
           <a href="javascript:void(0);" className="geItem custom-sidebar-node">
-            <svg className="custom-svg">
+          aaa
+            {/* <svg className="custom-svg">
               <g>
                 <g />
                 <g>
@@ -72,7 +73,7 @@ export default class SideBar extends React.Component {
                 <g />
                 <g />
               </g>
-            </svg>
+            </svg> */}
           </a>
           <a href="javascript:void(0);" className="geItem custom-sidebar-node">
             <svg className="custom-svg">
