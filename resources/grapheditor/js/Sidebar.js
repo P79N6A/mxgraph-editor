@@ -74,7 +74,7 @@ function Sidebar(editorUi, container) {
 Sidebar.prototype.init = function () {
   var dir = STENCIL_PATH;
 
-  this.addSearchPalette(true);
+  // this.addSearchPalette(true);
   // this.addGeneralPalette(true);
   // this.addMiscPalette(false);
   // this.addAdvancedPalette(false);
@@ -83,14 +83,15 @@ Sidebar.prototype.init = function () {
   // 	';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
   // this.addUmlPalette(false);
   // this.addBpmnPalette(dir, false);
-  this.addStencilPalette('flowchart', 'Flowchart', dir + '/flowchart.xml',
-    ';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
-  this.addImagePalette('clipart', mxResources.get('clipart'), dir + '/clipart/', '_128x128.png', ['Chart1','Chart2','Chart3','Chart4',
-  'Chart5','Chart6','Chart7','Chart8', 
-  ], null, {
-    'Wireless_Router_N': 'wireless router switch wap wifi access point wlan',
-    'Router_Icon': 'router switch'
-  });
+
+  // this.addStencilPalette('flowchart', 'Flowchart', dir + '/flowchart.xml',
+  //   ';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
+  // this.addImagePalette('clipart', mxResources.get('clipart'), dir + '/clipart/', '_128x128.png', ['Chart1', 'Chart2', 'Chart3', 'Chart4',
+  //   'Chart5', 'Chart6', 'Chart7', 'Chart8',
+  // ], null, {
+  //   'Wireless_Router_N': 'wireless router switch wap wifi access point wlan',
+  //   'Router_Icon': 'router switch'
+  // });
 };
 
 /**
@@ -1692,11 +1693,18 @@ Sidebar.prototype.createThumb = function (cells, width, height, parent, title, s
 
 /**
  * Creates and returns a new palette item for the given image.
+ * 通过图片创建节点
  */
-Sidebar.prototype.createItem = function (cells, title, showLabel, showTitle, width, height, allowCellsInserted) {
-  var elt = document.createElement('a');
-  elt.setAttribute('href', 'javascript:void(0);');
-  elt.className = 'geItem';
+Sidebar.prototype.createItem = function (cells, title, showLabel, showTitle, width, height, allowCellsInserted, elt) {
+
+  if (!elt) {
+
+    elt = document.createElement('a');
+    elt.setAttribute('href', 'javascript:void(0);');
+    elt.className = 'geItem';
+
+  }
+
   elt.style.overflow = 'hidden';
   var border = (mxClient.IS_QUIRKS) ? 8 + 2 * this.thumbPadding : 2 * this.thumbBorder;
   elt.style.width = (this.thumbWidth + border) + 'px';
@@ -2803,6 +2811,7 @@ Sidebar.prototype.addClickHandler = function (elt, ds, cells) {
 
 /**
  * Creates a drop handler for inserting the given cells.
+ * 对元素进行拖拽处理 by 宛天
  */
 Sidebar.prototype.createVertexTemplateEntry = function (style, width, height, value, title, showLabel, showTitle, tags) {
   tags = (tags != null && tags.length > 0) ? tags : title.toLowerCase();
@@ -2814,6 +2823,7 @@ Sidebar.prototype.createVertexTemplateEntry = function (style, width, height, va
 
 /**
  * Creates a drop handler for inserting the given cells.
+ * 创建节点
  */
 Sidebar.prototype.createVertexTemplate = function (style, width, height, value, title, showLabel, showTitle, allowCellsInserted) {
   var cells = [new mxCell((value != null) ? value : '', new mxGeometry(0, 0, width, height), style)];
@@ -2881,6 +2891,7 @@ Sidebar.prototype.createEdgeTemplateFromCells = function (cells, width, height, 
  * Adds the given palette.
  */
 Sidebar.prototype.addPaletteFunctions = function (id, title, expanded, fns) {
+
   this.addPalette(id, title, expanded, mxUtils.bind(this, function (content) {
     for (var i = 0; i < fns.length; i++) {
       content.appendChild(fns[i](content));
@@ -2905,7 +2916,7 @@ Sidebar.prototype.addPalette = function (id, title, expanded, onInit) {
 
   if (!expanded) {
     div.style.display = 'none';
-  } 
+  }
 
   this.addFoldingHandler(elt, div, onInit, expanded);
 
@@ -2969,6 +2980,9 @@ Sidebar.prototype.addFoldingHandler = function (title, content, funct, expanded)
     var prev = title.innerHTML;
     title.innerHTML = mxResources.get('loading') + '...';
 
+    // title => a.geTitle
+    // content => div.geSidebar
+
     window.setTimeout(function () {
       var fo = mxClient.NO_FO;
       mxClient.NO_FO = Editor.prototype.originalNoForeignObject;
@@ -2978,6 +2992,7 @@ Sidebar.prototype.addFoldingHandler = function (title, content, funct, expanded)
       title.style.cursor = '';
       title.innerHTML = prev;
     }, 0);
+
   }
 };
 
@@ -3020,7 +3035,7 @@ Sidebar.prototype.addImagePalette = function (id, title, prefix, postfix, items,
     }))(items[i], (titles != null) ? titles[i] : null, (tags != null) ? tags[items[i]] : null);
   }
 
-  this.addPaletteFunctions(id, title, false, fns);
+  this.addPaletteFunctions(id, title, true, fns);
 };
 
 /**
@@ -3073,7 +3088,7 @@ Sidebar.prototype.addStencilPalette = function (id, title, stencilFile, style, i
       }
     }), true, true);
 
-    this.addPaletteFunctions(id, title, true, fns);
+    this.addPaletteFunctions(id, title, false, fns);
   } else {
     this.addPalette(id, title, true, mxUtils.bind(this, function (content) {
       if (style == null) {

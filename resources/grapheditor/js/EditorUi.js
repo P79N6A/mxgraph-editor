@@ -2504,7 +2504,11 @@ EditorUi.prototype.createTabContainer = function () {
 EditorUi.prototype.createDivs = function () {
   this.menubarContainer = this.createDiv('geMenubarContainer');
   this.toolbarContainer = this.createDiv('geToolbarContainer');
-  this.sidebarContainer = this.createDiv('geSidebarContainer');
+  // this.sidebarContainer = this.createDiv('geSidebarContainer');
+  
+  // add by 宛天
+  this.sidebarContainer = document.querySelector('.J_Sidebar_Container');
+
   this.formatContainer = this.createDiv('geSidebarContainer geFormatContainer');
   this.diagramContainer = this.createDiv('geDiagramContainer');
   this.footerContainer = this.createDiv('geFooterContainer');
@@ -2575,6 +2579,8 @@ EditorUi.prototype.createUi = function () {
 
   // Creates the sidebar
   this.sidebar = (this.editor.chromeless) ? null : this.createSidebar(this.sidebarContainer);
+
+  window.sidebar = this.sidebar;
 
   if (this.sidebar != null) {
     this.container.appendChild(this.sidebarContainer);
