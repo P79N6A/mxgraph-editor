@@ -9,7 +9,10 @@ Editor = function(chromeless, themes, model, graph, editable)
 	mxEventSource.call(this);
 	this.chromeless = (chromeless != null) ? chromeless : this.chromeless;
 	this.initStencilRegistry();
-	this.graph = graph || this.createGraph(themes, model);
+  this.graph = graph || this.createGraph(themes, model);
+  
+  window.graph = this.graph;
+
 	this.editable = (editable != null) ? editable : !chromeless;
 	this.undoManager = this.createUndoManager();
 	this.status = '';

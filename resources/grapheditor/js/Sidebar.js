@@ -3088,7 +3088,7 @@ Sidebar.prototype.addStencilPalette = function (id, title, stencilFile, style, i
       }
     }), true, true);
 
-    this.addPaletteFunctions(id, title, false, fns);
+    this.addPaletteFunctions(id, title, true, fns);
   } else {
     this.addPalette(id, title, true, mxUtils.bind(this, function (content) {
       if (style == null) {

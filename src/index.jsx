@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Editor from './graph-editor';
 
+import './index.less';
+
 const App = () => {
   return (
     <div>
