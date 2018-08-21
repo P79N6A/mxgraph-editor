@@ -3,7 +3,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: './src/index.jsx',
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.less']
+    extensions: ['.js', '.jsx', '.json', '.less', '.css']
   },
   module: {
     rules: [{
@@ -21,12 +21,24 @@ module.exports = {
             minimize: true
           }
         }]
+      }, {
+        test: /\.css$/,
+        exclude: '/node_modules',
+        use: [{
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          }
+        ]
       },
       {
         test: /\.less$/,
         exclude: '/node_modules',
-        use: [
-          {
+        use: [{
             loader: 'style-loader'
           },
           {
