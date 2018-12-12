@@ -9,11 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.alibaba-inc.com:industry-brain-pass/com-mxgraph-editor.git"
+    "url": "git@github.com:korbinzhao/mxgraph-editor.git"
   },
   "keywords": [],
-  "author": "zhaobin.zb",
-  "license": "MIT",
+  "author": "korbinzhao",
   "bugs": {
     "url": ""
   },
