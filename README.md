@@ -1,5 +1,5 @@
-# react-webpack4-component-quickstart
-a quick start for a component based on react & webpack4
+# com-mxgraph-editor
+基于 react 的 mxgraph 编辑器
 
 # development
 ```

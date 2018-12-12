@@ -1,7 +1,7 @@
 {
-  "name": "webpack-4-quickstart",
+  "name": "com-mxgraph-editor",
   "version": "1.0.0",
-  "description": "> Webpack 4 tutorial: All You Need to Know, from 0 Conf to Production Mode",
+  "description": "基于 react 的 mxgraph 编辑器",
   "main": "build/index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
@@ -9,24 +9,33 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@gitlab.alibaba-inc.com:industry-brain-pass/com-mxgraph-editor.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "zhaobin.zb",
   "license": "MIT",
   "bugs": {
     "url": ""
   },
   "homepage": "",
   "devDependencies": {
-    "autoprefixer": "^9.1.1",
+    "autoprefixer": "^9.3.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^10.0.1",
     "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-plugin-import": "^1.11.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^1.0.0",
-    "cssnano": "^4.0.5",
+    "cssnano": "^4.1.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.0.4",
     "less": "^3.8.1",
@@ -36,14 +45,16 @@
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^12.0.0",
     "postcss-loader": "^3.0.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "raw-loader": "^1.0.0",
     "style-loader": "^0.22.1",
     "webpack": "^4.16.3",
-    "webpack-cli": "^2.1.5",
+    "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "antd": "^3.8.2"
+    "antd": "^3.8.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }
